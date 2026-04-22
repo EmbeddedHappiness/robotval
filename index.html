@@ -715,7 +715,7 @@
             <div class="option-grid" id="options"></div>
           </div>
 
-          <div class="result-state" id="resultState">
+          <div class="result-state" id="resultState" hidden>
             <div class="progress-meta">
               <span>Dina rekommendationer</span>
               <span>Klar</span>
@@ -1051,8 +1051,8 @@
 
     function showResults() {
       const recs = getRecommendations();
-      questionState.style.display = 'none';
-      resultState.style.display = 'block';
+      questionState.hidden = true;
+      resultState.hidden = false;
       resultsGrid.innerHTML = '';
 
       recs.forEach((item, index) => {
@@ -1077,8 +1077,8 @@
     function restartWizard() {
       currentStep = 0;
       Object.keys(state).forEach(key => delete state[key]);
-      resultState.style.display = 'none';
-      questionState.style.display = 'block';
+      resultState.hidden = true;
+      questionState.hidden = false;
       renderAnswersPreview();
       renderQuestion();
       document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
