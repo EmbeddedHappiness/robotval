@@ -33,6 +33,7 @@
     }
 
     a{text-decoration:none;color:inherit}
+    button{font:inherit}
     .container{
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
@@ -123,6 +124,7 @@
       font-size:16px;
       transition:.2s ease;
       border:1px solid transparent;
+      cursor:pointer;
     }
 
     .btn-primary{
@@ -355,6 +357,182 @@
       color:rgba(5,46,22,.8);
     }
 
+    .wizard-wrap{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .wizard-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:22px;
+      box-shadow:0 24px 50px rgba(15,23,42,.08);
+    }
+
+    .progress-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-size:14px;
+      color:#64748b;
+      margin-bottom:12px;
+    }
+
+    .progress{
+      width:100%;
+      height:12px;
+      background:#e2e8f0;
+      border-radius:999px;
+      overflow:hidden;
+      margin-bottom:24px;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:20%;
+      background:linear-gradient(90deg, #34d399, #10b981);
+      border-radius:999px;
+      transition:width .25s ease;
+    }
+
+    .question{
+      font-size:28px;
+      font-weight:800;
+      line-height:1.2;
+      margin:0 0 18px;
+      letter-spacing:-0.02em;
+    }
+
+    .option-grid{
+      display:grid;
+      gap:12px;
+    }
+
+    .option{
+      width:100%;
+      text-align:left;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#0f172a;
+      border-radius:20px;
+      padding:16px 18px;
+      font-weight:700;
+      font-size:16px;
+      cursor:pointer;
+      transition:.18s ease;
+      box-shadow:0 6px 18px rgba(15,23,42,.04);
+    }
+
+    .option:hover{
+      border-color:#86efac;
+      background:#f0fdf4;
+      transform:translateY(-1px);
+    }
+
+    .wizard-side{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .mini-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .mini-card h3{
+      margin:0 0 10px;
+      font-size:18px;
+    }
+
+    .mini-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .answers-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .answer-row{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      padding:10px 0;
+      border-bottom:1px solid #f1f5f9;
+      font-size:14px;
+    }
+
+    .answer-row:last-child{border-bottom:none}
+
+    .answer-label{color:#64748b}
+    .answer-value{font-weight:700;color:#0f172a;text-align:right}
+
+    .result-state{display:none}
+    .results-grid{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .result-card{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      background:#fff;
+      box-shadow:0 10px 24px rgba(15,23,42,.05);
+    }
+
+    .result-card h4{
+      margin:0;
+      font-size:20px;
+      line-height:1.3;
+    }
+
+    .result-card p{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .result-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .tag{
+      background:#ecfdf5;
+      color:#065f46;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .result-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
+
     .footer{
       border-top:1px solid var(--line);
       padding:22px 0 34px;
@@ -377,7 +555,8 @@
       .hero-grid,
       .dark-grid,
       .grid-3,
-      .trust-row{
+      .trust-row,
+      .wizard-wrap{
         grid-template-columns:1fr;
       }
 
@@ -389,13 +568,15 @@
         padding:52px 0;
       }
 
-      .card{
+      .card,
+      .wizard-card{
         border-radius:24px;
       }
 
       .info-card,
       .needs-box,
-      .cta-box{
+      .cta-box,
+      .mini-card{
         border-radius:24px;
       }
 
@@ -403,6 +584,10 @@
       .card-head{
         flex-direction:column;
         align-items:flex-start;
+      }
+
+      .question{
+        font-size:24px;
       }
     }
   </style>
@@ -428,14 +613,14 @@
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" href="#start">Starta guiden</a>
+            <a class="btn btn-primary" href="#wizard">Starta gratis guide</a>
             <a class="btn btn-secondary" href="#exempel">Se exempel</a>
           </div>
 
           <div class="trust-row">
             <div class="trust-pill">Gratis att använda</div>
             <div class="trust-pill">Anpassat för svenska tomter</div>
-            <div class="trust-pill">Jämför smartare</div>
+            <div class="trust-pill">Tar ca 1 minut</div>
           </div>
         </div>
 
@@ -503,31 +688,79 @@
     </div>
   </section>
 
-  <section id="start" class="section">
+  <section id="wizard" class="section">
     <div class="container">
       <div class="section-title">
-        <div class="eyebrow">Så fungerar det</div>
-        <h2>Snabbare än att läsa tester själv</h2>
+        <div class="eyebrow">Guiden</div>
+        <h2>Få ett första val direkt</h2>
         <p class="lead" style="margin-top:14px">
-          RobotVal hjälper dig att välja rätt modell utifrån din tomt och dina behov, utan att du behöver jämföra allt manuellt.
+          Svara på några frågor om din tomt och dina behov. När du är klar får du tre rekommenderade modeller direkt.
         </p>
       </div>
 
-      <div class="grid-3">
-        <div class="info-card">
-          <div class="step-num">1</div>
-          <h3>Beskriv din tomt</h3>
-          <p>Ange storlek, lutning, smala passager och om du vill ha en modell utan slinga.</p>
+      <div class="wizard-wrap">
+        <div class="wizard-card">
+          <div id="questionState">
+            <div class="progress-meta">
+              <span id="stepLabel">Fråga 1 av 5</span>
+              <span id="stepHint">Tar ca 1 minut</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <h3 class="question" id="questionText">Hur stor är din tomt?</h3>
+            <div class="option-grid" id="options"></div>
+          </div>
+
+          <div class="result-state" id="resultState">
+            <div class="progress-meta">
+              <span>Dina rekommendationer</span>
+              <span>Klar</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" style="width:100%"></div>
+            </div>
+
+            <h3 class="question">Vi rekommenderar dessa modeller</h3>
+            <p class="lead" style="font-size:16px;margin-top:0">
+              Baserat på dina svar har vi valt tre modeller som bör passa din situation bäst.
+            </p>
+
+            <div class="results-grid" id="resultsGrid"></div>
+
+            <div class="result-actions">
+              <button class="btn btn-primary" id="restartBtn" type="button">Gör om guiden</button>
+              <a class="btn btn-secondary" href="mailto:hej@robotval.se?subject=Fråga%20om%20RobotVal">Ställ en fråga</a>
+            </div>
+          </div>
         </div>
-        <div class="info-card">
-          <div class="step-num">2</div>
-          <h3>Välj budget</h3>
-          <p>Vi väger in prisnivå, funktioner och vilken typ av användning som passar bäst.</p>
-        </div>
-        <div class="info-card">
-          <div class="step-num">3</div>
-          <h3>Få rätt modell</h3>
-          <p>Du får tydliga rekommendationer med motivering, så att du snabbare kan köpa rätt.</p>
+
+        <div class="wizard-side">
+          <div class="mini-card">
+            <h3>Vad vi väger in</h3>
+            <p>
+              Tomtstorlek, budget, smala passager, lutning och om du vill slippa begränsningsslinga.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <h3>Dina svar</h3>
+            <div class="answers-list" id="answersPreview">
+              <div class="answer-row"><span class="answer-label">Tomt</span><span class="answer-value">–</span></div>
+              <div class="answer-row"><span class="answer-label">Budget</span><span class="answer-value">–</span></div>
+              <div class="answer-row"><span class="answer-label">Smala passager</span><span class="answer-value">–</span></div>
+              <div class="answer-row"><span class="answer-label">Lutning</span><span class="answer-value">–</span></div>
+              <div class="answer-row"><span class="answer-label">Utan slinga</span><span class="answer-value">–</span></div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <h3>Tips</h3>
+            <p>
+              Har du smala passager eller kuperad tomt är det ofta värt att prioritera navigation och driftsäkerhet framför lägsta pris.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -566,14 +799,14 @@
       <div class="cta-box">
         <div class="eyebrow" style="color:rgba(5,46,22,.65)">Nästa steg</div>
         <h2 style="margin-top:10px;font-size:clamp(30px,4vw,44px);letter-spacing:-.02em">
-          Guiden är på väg
+          RobotVal byggs vidare
         </h2>
         <p class="lead" style="max-width:700px;margin-top:14px">
-          RobotVal börjar med robotgräsklippare och byggs för att hjälpa dig fatta ett bättre köpbeslut snabbare.
+          Nästa version kommer att få fler modeller, bättre jämförelser och tydligare länkar till återförsäljare.
         </p>
 
         <div class="actions">
-          <a class="btn btn-primary" href="#start" style="background:#0f172a">Starta guiden snart</a>
+          <a class="btn btn-primary" href="#wizard" style="background:#0f172a">Testa guiden igen</a>
           <a class="btn btn-secondary" href="mailto:hej@robotval.se" style="background:rgba(255,255,255,.6)">Kontakta oss</a>
         </div>
       </div>
@@ -583,8 +816,276 @@
   <footer class="footer">
     <div class="container footer-row">
       <div>© 2026 RobotVal.se</div>
-      <div>Hitta rätt robotgräsklippare snabbare.</div>
+      <div>Uppdaterad april 2026</div>
     </div>
   </footer>
+
+  <script>
+    const questions = [
+      {
+        key: 'size',
+        label: 'Tomt',
+        text: 'Hur stor är din tomt?',
+        options: [
+          { value: 'small', label: 'Under 300 kvm' },
+          { value: 'medium', label: '300–700 kvm' },
+          { value: 'large', label: '700–1200 kvm' },
+          { value: 'xlarge', label: '1200+ kvm' }
+        ]
+      },
+      {
+        key: 'budget',
+        label: 'Budget',
+        text: 'Vilken budget har du?',
+        options: [
+          { value: 'low', label: 'Under 10 000 kr' },
+          { value: 'mid', label: '10 000–20 000 kr' },
+          { value: 'high', label: '20 000–35 000 kr' },
+          { value: 'premium', label: '35 000+ kr' }
+        ]
+      },
+      {
+        key: 'passages',
+        label: 'Smala passager',
+        text: 'Har du smala passager?',
+        options: [
+          { value: 'yes', label: 'Ja' },
+          { value: 'no', label: 'Nej' }
+        ]
+      },
+      {
+        key: 'slope',
+        label: 'Lutning',
+        text: 'Är tomten kuperad?',
+        options: [
+          { value: 'flat', label: 'Mest platt' },
+          { value: 'medium', label: 'Lite lutning' },
+          { value: 'steep', label: 'Ganska brant' }
+        ]
+      },
+      {
+        key: 'wireless',
+        label: 'Utan slinga',
+        text: 'Vill du slippa slinga?',
+        options: [
+          { value: 'yes', label: 'Ja' },
+          { value: 'no', label: 'Nej' },
+          { value: 'any', label: 'Spelar ingen roll' }
+        ]
+      }
+    ];
+
+    const models = [
+      {
+        name: 'Gardena Sileno City',
+        tags: ['Tyst', 'Liten tomt', 'Enkel'],
+        description: 'Bra val för mindre tomter där låg ljudnivå och enkel vardagsanvändning är viktigast.',
+        match: (a) => {
+          let score = 0;
+          if (a.size === 'small') score += 5;
+          if (a.budget === 'low') score += 3;
+          if (a.budget === 'mid') score += 2;
+          if (a.passages === 'yes') score += 2;
+          if (a.wireless === 'no') score += 1;
+          return score;
+        }
+      },
+      {
+        name: 'Worx Landroid M500',
+        tags: ['Budget', 'Liten tomt', 'Prisvärd'],
+        description: 'Passar dig som vill komma igång till lägre pris och har en enklare tomt.',
+        match: (a) => {
+          let score = 0;
+          if (a.budget === 'low') score += 5;
+          if (a.size === 'small' || a.size === 'medium') score += 3;
+          if (a.slope === 'flat') score += 2;
+          if (a.wireless === 'no') score += 1;
+          return score;
+        }
+      },
+      {
+        name: 'Husqvarna Automower 305',
+        tags: ['Smala passager', 'Kompakt', 'Premium'],
+        description: 'Starkt val för mindre till medelstora tomter där navigation och kvalitet väger tungt.',
+        match: (a) => {
+          let score = 0;
+          if (a.size === 'small' || a.size === 'medium') score += 4;
+          if (a.passages === 'yes') score += 4;
+          if (a.budget === 'mid') score += 3;
+          if (a.budget === 'high') score += 2;
+          if (a.slope === 'medium') score += 2;
+          return score;
+        }
+      },
+      {
+        name: 'Husqvarna Automower 415X',
+        tags: ['Bäst balans', 'Passager', 'Kuperad tomt'],
+        description: 'Bra allroundval för medelstora tomter med smala passager och lite tuffare förutsättningar.',
+        match: (a) => {
+          let score = 0;
+          if (a.size === 'medium' || a.size === 'large') score += 4;
+          if (a.passages === 'yes') score += 4;
+          if (a.slope === 'medium' || a.slope === 'steep') score += 3;
+          if (a.budget === 'high' || a.budget === 'premium') score += 3;
+          return score;
+        }
+      },
+      {
+        name: 'Segway Navimow i105E',
+        tags: ['Utan slinga', 'Modern app', 'Smidig'],
+        description: 'Bra alternativ för mindre till medelstora tomter om du vill slippa begränsningskabel.',
+        match: (a) => {
+          let score = 0;
+          if (a.wireless === 'yes') score += 6;
+          if (a.size === 'small' || a.size === 'medium') score += 3;
+          if (a.budget === 'mid' || a.budget === 'high') score += 3;
+          if (a.passages === 'yes') score += 1;
+          return score;
+        }
+      },
+      {
+        name: 'Segway Navimow i108E',
+        tags: ['Utan slinga', 'Större tomt', 'Modern'],
+        description: 'Starkt val om du vill ha en kabel-fri lösning för medelstor till större tomt.',
+        match: (a) => {
+          let score = 0;
+          if (a.wireless === 'yes') score += 6;
+          if (a.size === 'medium' || a.size === 'large') score += 4;
+          if (a.budget === 'high' || a.budget === 'premium') score += 3;
+          if (a.slope === 'medium') score += 1;
+          return score;
+        }
+      },
+      {
+        name: 'Dreame A1',
+        tags: ['Utan slinga', 'Modern', 'Premium'],
+        description: 'Intressant alternativ för dig som prioriterar ny teknik och vill slippa slinga.',
+        match: (a) => {
+          let score = 0;
+          if (a.wireless === 'yes') score += 6;
+          if (a.budget === 'high' || a.budget === 'premium') score += 4;
+          if (a.size === 'medium' || a.size === 'large') score += 2;
+          return score;
+        }
+      },
+      {
+        name: 'Husqvarna Automower 430X NERA',
+        tags: ['Premium', 'Stor tomt', 'Kuperad'],
+        description: 'För större eller mer krävande tomter där prestanda, navigering och kapacitet är viktigast.',
+        match: (a) => {
+          let score = 0;
+          if (a.size === 'large' || a.size === 'xlarge') score += 5;
+          if (a.slope === 'steep') score += 4;
+          if (a.budget === 'premium') score += 5;
+          if (a.passages === 'yes') score += 2;
+          if (a.wireless === 'yes') score += 1;
+          return score;
+        }
+      }
+    ];
+
+    const state = {};
+    let currentStep = 0;
+
+    const questionText = document.getElementById('questionText');
+    const optionsEl = document.getElementById('options');
+    const progressBar = document.getElementById('progressBar');
+    const stepLabel = document.getElementById('stepLabel');
+    const answersPreview = document.getElementById('answersPreview');
+    const resultState = document.getElementById('resultState');
+    const questionState = document.getElementById('questionState');
+    const resultsGrid = document.getElementById('resultsGrid');
+    const restartBtn = document.getElementById('restartBtn');
+
+    function renderAnswersPreview() {
+      answersPreview.innerHTML = '';
+      questions.forEach((q) => {
+        const selected = q.options.find(o => o.value === state[q.key]);
+        const row = document.createElement('div');
+        row.className = 'answer-row';
+        row.innerHTML = `
+          <span class="answer-label">${q.label}</span>
+          <span class="answer-value">${selected ? selected.label : '–'}</span>
+        `;
+        answersPreview.appendChild(row);
+      });
+    }
+
+    function renderQuestion() {
+      const q = questions[currentStep];
+      const pct = ((currentStep + 1) / questions.length) * 100;
+
+      stepLabel.textContent = `Fråga ${currentStep + 1} av ${questions.length}`;
+      progressBar.style.width = pct + '%';
+      questionText.textContent = q.text;
+      optionsEl.innerHTML = '';
+
+      q.options.forEach((option) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option';
+        btn.textContent = option.label;
+        btn.addEventListener('click', () => {
+          state[q.key] = option.value;
+          renderAnswersPreview();
+
+          if (currentStep < questions.length - 1) {
+            currentStep += 1;
+            renderQuestion();
+          } else {
+            showResults();
+          }
+        });
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function getRecommendations() {
+      return models
+        .map(model => ({ ...model, score: model.match(state) }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3);
+    }
+
+    function showResults() {
+      const recs = getRecommendations();
+      questionState.style.display = 'none';
+      resultState.style.display = 'block';
+      resultsGrid.innerHTML = '';
+
+      recs.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'result-card';
+        card.innerHTML = `
+          <div class="result-top">
+            <div>
+              <h4>${index + 1}. ${item.name}</h4>
+              <p>${item.description}</p>
+            </div>
+            <div class="small-badge">${index === 0 ? 'Toppval' : index === 1 ? 'Alternativ' : 'Budget/Premium'}</div>
+          </div>
+          <div class="result-tags">
+            ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+        `;
+        resultsGrid.appendChild(card);
+      });
+    }
+
+    function restartWizard() {
+      currentStep = 0;
+      Object.keys(state).forEach(key => delete state[key]);
+      resultState.style.display = 'none';
+      questionState.style.display = 'block';
+      renderAnswersPreview();
+      renderQuestion();
+      document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    restartBtn.addEventListener('click', restartWizard);
+
+    renderAnswersPreview();
+    renderQuestion();
+  </script>
 </body>
 </html>
