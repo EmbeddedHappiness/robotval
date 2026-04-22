@@ -1,36 +1,203 @@
-<!doctype html>
-<html lang="sv">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RobotVal.se</title>
-<style>
-body{font-family:Arial,sans-serif;margin:0;padding:0;background:#f8faf8;color:#111}
-.wrap{max-width:800px;margin:auto;padding:40px 20px}
-.hero{padding:60px 0}
-h1{font-size:42px;line-height:1.1}
-p{font-size:20px;color:#444}
-.btn{display:inline-block;background:#111;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;margin-top:20px}
-.card{background:#fff;padding:20px;border-radius:16px;margin-top:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-</style>
-</head>
-<body>
-<div class="wrap">
-<div class="hero">
-<h1>Hitta rätt robotgräsklippare på 60 sekunder</h1>
-<p>Slipp läsa tester och jämföra hundratals modeller. RobotVal hjälper dig välja rätt modell för din tomt.</p>
-<a class="btn" href="#">Guiden kommer snart</a>
-</div>
+export default function RobotValLandingPage() { const exampleResults = [ { name: 'Husqvarna Automower 415X', reason: 'Starkt val för medelstora tomter med smala passager, bra navigation och hög driftsäkerhet.', badge: 'Bäst balans', }, { name: 'Segway Navimow i108E', reason: 'Passar dig som vill slippa begränsningskabel och få enkel, modern appstyrning.', badge: 'Utan slinga', }, { name: 'Gardena Sileno City', reason: 'Bra alternativ om du prioriterar låg ljudnivå och enkel vardagsanvändning på mindre ytor.', badge: 'Tyst val', }, ]
 
-<div class="card">
-<h2>Vanliga behov</h2>
-<p>✔ Smal passage<br>✔ Sluttning<br>✔ Ute efter låg budget<br>✔ Ute efter premium<br>✔ Utan slinga</p>
-</div>
+const needs = [ 'Under 20 000 kr', 'För smal passage', 'För sluttning', 'Utan slinga', 'Tyst robotgräsklippare', 'För liten tomt', ]
 
-<div class="card">
-<h2>Kommer snart</h2>
-<p>Sveriges smartaste guide till robotgräsklippare.</p>
-</div>
-</div>
-</body>
-</html>
+const steps = [ { title: 'Beskriv din tomt', text: 'Ange storlek, lutning, smala passager och om du vill ha en modell utan slinga.', }, { title: 'Välj budget', text: 'Vi väger in prisnivå, funktioner och vilken typ av användning som passar bäst.', }, { title: 'Få rätt modell', text: 'Du får tydliga rekommendationer med motivering, så att du snabbare kan köpa rätt.', }, ]
+
+return ( <main className="min-h-screen bg-white text-slate-900"> <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50 via-white to-white"> <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.06),transparent_30%)]" />
+
+<div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="flex items-center justify-between gap-4">
+        <div className="inline-flex items-center rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm">
+          RobotVal.se
+        </div>
+        <div className="hidden md:flex items-center gap-3 text-sm text-slate-500">
+          <span>Gratis guide</span>
+          <span>•</span>
+          <span>Svenska modeller</span>
+        </div>
+      </div>
+
+      <div className="mt-12 grid items-center gap-10 md:grid-cols-2 md:gap-14">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-700">
+            Hitta rätt snabbare
+          </p>
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
+            Hitta rätt robotgräsklippare på 60 sekunder
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600 md:text-xl">
+            Undvik felköp. Få rätt modell baserat på tomt, budget och behov — utan att läsa tester och jämföra allt själv.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="#start"
+              className="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-slate-200 transition hover:-translate-y-0.5 hover:opacity-95"
+            >
+              Starta guiden
+            </a>
+            <a
+              href="#exempel"
+              className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-6 py-3.5 text-base font-semibold text-slate-700 transition hover:bg-slate-50"
+            >
+              Se exempel
+            </a>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {[
+              'Gratis att använda',
+              'Anpassat för svenska tomter',
+              'Jämför smartare',
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-2xl shadow-slate-200/60 md:p-6">
+            <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div>
+                <p className="text-sm font-medium text-slate-500">Exempel på rekommendation</p>
+                <h2 className="mt-1 text-xl font-semibold text-slate-900">För 800 kvm + smal passage</h2>
+              </div>
+              <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-700">
+                Topp 3
+              </span>
+            </div>
+
+            <div className="mt-5 space-y-4">
+              {exampleResults.map((item) => (
+                <div key={item.name} className="rounded-2xl border border-slate-200 p-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-base font-semibold text-slate-900 md:text-lg">{item.name}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{item.reason}</p>
+                    </div>
+                    <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">
+                      {item.badge}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section className="border-y border-slate-200 bg-slate-50">
+    <div className="mx-auto max-w-6xl px-6 py-14">
+      <div className="grid gap-4 text-center md:grid-cols-3 md:text-left">
+        {[
+          ['1 minut att förstå', 'Du svarar på några enkla frågor och får snabbare rätt riktning.'],
+          ['Mindre risk för felköp', 'Ta hänsyn till passage, lutning, pris och om du vill slippa slinga.'],
+          ['Byggd för köpbeslut', 'Målet är inte mer läsning, utan ett bättre val.'],
+        ].map(([title, text]) => (
+          <div key={title} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+            <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+            <p className="mt-3 text-sm leading-6 text-slate-600">{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="start" className="mx-auto max-w-6xl px-6 py-20">
+    <div className="max-w-2xl">
+      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-700">Så fungerar det</p>
+      <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+        Snabbare än att läsa tester själv
+      </h2>
+      <p className="mt-4 text-lg text-slate-600">
+        RobotVal hjälper dig att välja rätt modell utifrån din tomt och dina behov, utan att du behöver jämföra allt manuellt.
+      </p>
+    </div>
+
+    <div className="mt-12 grid gap-6 md:grid-cols-3">
+      {steps.map((step, index) => (
+        <div key={step.title} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-lg font-bold text-emerald-700">
+            {index + 1}
+          </div>
+          <h3 className="mt-5 text-xl font-semibold text-slate-900">{step.title}</h3>
+          <p className="mt-3 leading-7 text-slate-600">{step.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="exempel" className="bg-slate-900 text-white">
+    <div className="mx-auto max-w-6xl px-6 py-20">
+      <div className="grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-start">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-300">Exempel</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+            Ett bättre sätt att välja robotgräsklippare
+          </h2>
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300">
+            Istället för att läsa flera guider själv får du ett tydligare val utifrån din situation — till exempel om du har smala passager, kuperad tomt eller vill slippa kabel.
+          </p>
+        </div>
+
+        <div className="rounded-[2rem] border border-slate-700 bg-slate-800 p-6">
+          <p className="text-sm font-medium text-slate-400">Vanliga behov</p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            {needs.map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-medium text-slate-200"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section className="mx-auto max-w-5xl px-6 py-20">
+    <div className="rounded-[2rem] bg-gradient-to-br from-emerald-500 to-emerald-400 px-6 py-10 text-slate-950 shadow-2xl md:px-10 md:py-14">
+      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-950/70">Nästa steg</p>
+      <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+        Guiden är på väg
+      </h2>
+      <p className="mt-4 max-w-2xl text-lg leading-8 text-emerald-950/80">
+        RobotVal börjar med robotgräsklippare och byggs för att hjälpa dig fatta ett bättre köpbeslut snabbare.
+      </p>
+
+      <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+        <a
+          href="#"
+          className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-6 py-3.5 text-base font-semibold text-white transition hover:opacity-90"
+        >
+          Starta guiden snart
+        </a>
+        <a
+          href="mailto:hej@robotval.se"
+          className="inline-flex items-center justify-center rounded-2xl border border-emerald-950/20 bg-white/60 px-6 py-3.5 text-base font-semibold text-slate-900 transition hover:bg-white/80"
+        >
+          Kontakta oss
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer className="border-t border-slate-200">
+    <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+      <p>© {new Date().getFullYear()} RobotVal.se</p>
+      <p>Hitta rätt robotgräsklippare snabbare.</p>
+    </div>
+  </footer>
+</main>
+
+) }
