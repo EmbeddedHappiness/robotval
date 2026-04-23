@@ -703,6 +703,14 @@
       <div>© 2026 RobotVal.se</div>
       <div>RobotVal hjälper dig välja modell. Kontrollera alltid aktuell prisnivå och specifikation hos återförsäljare.</div>
     </div>
+    <div class="container" style="margin-bottom:24px;">
+      <div id="metricsBox" style="padding:16px; border:1px solid #e2e8f0; border-radius:16px; background:#fff; color:#475569; font-size:14px; line-height:1.7;">
+        Laddar statistik...
+      </div>
+      <div style="margin-top:10px;">
+        <button id="resetMetricsBtn" class="btn btn-light" type="button">Nollställ lokal statistik</button>
+      </div>
+    </div>
   </footer>
 
   <script>
@@ -1036,6 +1044,7 @@
     }
 
     function showResults(){
+      trackMetric('resultsShown');
       const ranked = getRankedModels();
       const recs = ranked.slice(0, 3);
       const rejected = ranked.slice(3, 5);
@@ -1064,10 +1073,24 @@
             }).join('') +
           '</div>' +
           '<div class="cta-row">' +
-            '<a class="btn btn-success" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Se pris hos butik</a>' +
-            '<a class="btn btn-light" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Sök fler butiker</a>' +
+            '<a class="btn btn-success price-link" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Se pris hos butik</a>' +
+            '<a class="btn btn-light compare-link" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Jämför priser</a>' +
           '</div>';
         resultsGrid.appendChild(card);
+        
+        const priceBtn = card.querySelector('.price-link');
+        if (priceBtn) {
+          priceBtn.addEventListener('click', function () {
+            trackMetric('priceClicks');
+          });
+        }
+        
+        const compareBtn = card.querySelector('.compare-link');
+        if (compareBtn) {
+          compareBtn.addEventListener('click', function () {
+            trackMetric('compareClicks');
+          });
+        }
       }
 
       for (let i = 0; i < rejected.length; i++) {
@@ -1091,6 +1114,67 @@
       document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    const analyticsKey = 'robotval_metrics_v1';
+    function getMetrics() {    
+      const raw = localStorage.getItem(analyticsKey);    
+      if (!raw) {
+        return {
+          guideStarts: 0,
+          resultsShown: 0,
+          priceClicks: 0,
+          compareClicks: 0
+        };
+      }
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return {
+          guideStarts: 0,
+          resultsShown: 0,
+          priceClicks: 0,
+          compareClicks: 0
+        };
+      }
+    }
+    function saveMetrics(metrics) {
+      localStorage.setItem(analyticsKey, JSON.stringify(metrics));
+    }
+    function trackMetric(name) {
+      const metrics = getMetrics();
+      metrics[name] = (metrics[name] || 0) + 1;
+      saveMetrics(metrics);
+      renderMetrics();
+    }
+    function renderMetrics() {
+      const box = document.getElementById('metricsBox');
+      if (!box) return;
+    const metrics = getMetrics();
+      box.innerHTML = `
+      <strong>RobotVal lokal statistik</strong><br>
+      Startade guide: ${metrics.guideStarts}<br>
+      Visade resultat: ${metrics.resultsShown}<br>
+      Klick på "Se pris hos butik": ${metrics.priceClicks}<br>
+      Klick på "Jämför priser": ${metrics.compareClicks}
+      `;
+    }
+    function resetMetrics() {
+      localStorage.removeItem(analyticsKey);
+      renderMetrics();
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      renderMetrics();
+    const startButtons = document.querySelectorAll('a[href="#wizard"]');
+      startButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+          trackMetric('guideStarts');
+        });
+      });
+    const resetBtn = document.getElementById('resetMetricsBtn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', resetMetrics);
+      }
+    });
+    
     restartBtn.onclick = restartWizard;
 
     renderAnswersPreview();
