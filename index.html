@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RobotVal.se – Hitta rätt robotgräsklippare</title>
-  <meta name="description" content="Hitta rätt robotgräsklippare på 60 sekunder.">
+  <meta name="description" content="Hitta rätt robotgräsklippare på 60 sekunder. Jämför smartare utifrån gräsyta, budget och behov.">
   <style>
     :root{
       --bg:#f8fbf8;
@@ -16,9 +16,8 @@
       --green-dark:#047857;
       --dark:#0f172a;
       --shadow:0 10px 30px rgba(15,23,42,.08);
-      --max:1100px;
+      --max:1120px;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
@@ -28,10 +27,8 @@
       color:var(--text);
       line-height:1.5;
     }
-
     a{text-decoration:none;color:inherit}
     button{font:inherit}
-
     [hidden]{display:none !important}
 
     .container{
@@ -274,7 +271,7 @@
 
     .wizard-wrap{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1.08fr .92fr;
       gap:22px;
       align-items:start;
       margin-top:24px;
@@ -330,7 +327,6 @@
     }
 
     .answer-row:last-child{border-bottom:none}
-
     .answer-label{color:#64748b}
     .answer-value{font-weight:700;color:#0f172a;text-align:right}
 
@@ -391,14 +387,26 @@
       background:#f0fdf4;
     }
 
-    .results-grid{
+    .summary-box{
+      margin-bottom:18px;
+      padding:14px 16px;
+      border:1px solid #bbf7d0;
+      background:#f0fdf4;
+      border-radius:18px;
+      color:#14532d;
+      font-size:14px;
+      line-height:1.6;
+      font-weight:600;
+    }
+
+    .results-grid, .rejected-grid{
       display:flex;
       flex-direction:column;
       gap:14px;
       margin-top:16px;
     }
 
-    .result-card{
+    .result-card, .rejected-card{
       border:1px solid var(--line);
       border-radius:20px;
       padding:16px;
@@ -406,16 +414,32 @@
       box-shadow:0 10px 24px rgba(15,23,42,.05);
     }
 
-    .result-card h4{
+    .result-card h4, .rejected-card h4{
       margin:0;
       font-size:20px;
     }
 
-    .result-card p{
+    .result-card p, .rejected-card p{
       margin:10px 0 0;
       color:var(--muted);
       font-size:15px;
       line-height:1.7;
+    }
+
+    .reason-list{
+      margin:12px 0 0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .reason-list li{
+      color:#0f172a;
+      font-size:14px;
+      line-height:1.6;
+      padding-left:2px;
     }
 
     .result-tags{
@@ -432,6 +456,20 @@
       border-radius:999px;
       font-size:12px;
       font-weight:700;
+    }
+
+    .subheading{
+      margin-top:26px;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-0.02em;
+    }
+
+    .subtext{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
     }
 
     .result-actions{
@@ -462,22 +500,18 @@
       .wizard-wrap{
         grid-template-columns:1fr;
       }
-
       .card,
       .wizard-card,
       .info-card,
       .mini-card{
         border-radius:22px;
       }
-
       .question{
         font-size:24px;
       }
-
       .section{
         padding:48px 0;
       }
-
       .card-head{
         flex-direction:column;
         align-items:flex-start;
@@ -497,7 +531,7 @@
           <div class="eyebrow">Hitta rätt snabbare</div>
           <h1>Hitta rätt robotgräsklippare på 60 sekunder</h1>
           <p class="lead">
-            Undvik felköp. Få rätt modell baserat på tomt, budget och behov — utan att läsa tester och jämföra allt själv.
+            Undvik felköp. Få rätt modell baserat på gräsyta, budget och behov — utan att läsa tester och jämföra allt själv.
           </p>
 
           <div class="actions">
@@ -516,7 +550,7 @@
           <div class="card-head">
             <div>
               <p class="muted">Exempel på rekommendation</p>
-              <h2>För 800 kvm + smal passage</h2>
+              <h2>För 800 kvm gräsyta + smal passage</h2>
             </div>
             <div class="badge">Topp 3</div>
           </div>
@@ -524,7 +558,7 @@
           <div class="example-list">
             <div class="example-item">
               <h3>Husqvarna Automower 415X</h3>
-              <p>Starkt val för medelstora tomter med smala passager, bra navigation och hög driftsäkerhet.</p>
+              <p>Starkt val för medelstora gräsytor med smala passager, bra navigation och hög driftsäkerhet.</p>
             </div>
             <div class="example-item">
               <h3>Segway Navimow i108E</h3>
@@ -565,7 +599,7 @@
         <div class="eyebrow">Guiden</div>
         <h2>Få ett första val direkt</h2>
         <p class="lead" style="margin-top:14px">
-          Svara på några frågor om din tomt och dina behov. När du är klar får du tre rekommenderade modeller direkt.
+          Svara på några frågor om din gräsyta och dina behov. När du är klar får du tre rekommenderade modeller och ser varför andra valdes bort.
         </p>
       </div>
 
@@ -580,7 +614,7 @@
               <div class="progress-bar" id="progressBar"></div>
             </div>
 
-            <h3 class="question" id="questionText">Hur stor är din tomt?</h3>
+            <h3 class="question" id="questionText">Hur stor gräsyta ska klippas?</h3>
             <div class="option-grid" id="options">
               <button type="button" class="option">Under 300 kvm</button>
               <button type="button" class="option">300–700 kvm</button>
@@ -598,12 +632,20 @@
               <div class="progress-bar" style="width:100%"></div>
             </div>
 
-            <h3 class="question">Vi rekommenderar dessa modeller</h3>
+            <h3 class="question">Här är modellerna som passar bäst utifrån dina svar</h3>
             <p class="lead" style="font-size:16px;margin-top:0">
-              Baserat på dina svar har vi valt tre modeller som bör passa din situation bäst.
+              Vi har vägt in gräsyta, budget, passager, lutning och om du vill slippa slinga.
             </p>
 
+            <div class="summary-box" id="resultSummary"></div>
+
             <div class="results-grid" id="resultsGrid"></div>
+
+            <h4 class="subheading">Andra modeller vi valde bort</h4>
+            <p class="subtext">
+              De här alternativen kan vara bra i andra lägen, men matchar dina svar sämre.
+            </p>
+            <div class="rejected-grid" id="rejectedGrid"></div>
 
             <div class="result-actions">
               <button class="btn btn-primary" id="restartBtn" type="button">Gör om guiden</button>
@@ -615,7 +657,7 @@
         <div class="wizard-side">
           <div class="mini-card">
             <h3>Vad vi väger in</h3>
-            <p>Tomtstorlek, budget, smala passager, lutning och om du vill slippa begränsningsslinga.</p>
+            <p>Gräsyta, budget, smala passager, lutning och om du vill slippa begränsningsslinga.</p>
           </div>
 
           <div class="mini-card">
@@ -625,7 +667,7 @@
 
           <div class="mini-card">
             <h3>Tips</h3>
-            <p>Har du smala passager eller kuperad tomt är det ofta värt att prioritera navigation och driftsäkerhet framför lägsta pris.</p>
+            <p>Har du smala passager eller kuperad gräsyta är det ofta värt att prioritera navigation och driftsäkerhet framför lägsta pris.</p>
           </div>
         </div>
       </div>
@@ -638,7 +680,7 @@
         <div class="eyebrow">Exempel</div>
         <h2>Ett bättre sätt att välja robotgräsklippare</h2>
         <p class="lead" style="margin-top:14px">
-          I stället för att läsa flera guider själv får du ett tydligare val utifrån din situation.
+          I stället för att läsa flera guider själv får du ett tydligare val utifrån din situation — och en förklaring till varför.
         </p>
       </div>
     </div>
@@ -647,7 +689,7 @@
   <footer class="footer">
     <div class="container footer-row">
       <div>© 2026 RobotVal.se</div>
-      <div>Uppdaterad april 2026</div>
+      <div>RobotVal hjälper dig välja modell. Kontrollera alltid aktuell prisnivå och specifikation hos återförsäljare.</div>
     </div>
   </footer>
 
@@ -655,8 +697,8 @@
     const questions = [
       {
         key: 'size',
-        label: 'Tomt',
-        text: 'Hur stor är din tomt?',
+        label: 'Gräsyta',
+        text: 'Hur stor gräsyta ska klippas?',
         options: [
           { value: 'small', label: 'Under 300 kvm' },
           { value: 'medium', label: '300–700 kvm' },
@@ -687,7 +729,7 @@
       {
         key: 'slope',
         label: 'Lutning',
-        text: 'Är tomten kuperad?',
+        text: 'Är gräsytan kuperad?',
         options: [
           { value: 'flat', label: 'Mest platt' },
           { value: 'medium', label: 'Lite lutning' },
@@ -709,8 +751,8 @@
     const models = [
       {
         name: 'Gardena Sileno City',
-        tags: ['Tyst', 'Liten tomt', 'Enkel'],
-        description: 'Bra val för mindre tomter där låg ljudnivå och enkel vardagsanvändning är viktigast.',
+        tags: ['Tyst', 'Liten gräsyta', 'Enkel'],
+        description: 'Bra val för mindre gräsytor där låg ljudnivå och enkel vardagsanvändning är viktigast.',
         score(a){
           let s = 0;
           if (a.size === 'small') s += 5;
@@ -719,24 +761,48 @@
           if (a.passages === 'yes') s += 2;
           if (a.wireless === 'no') s += 1;
           return s;
+        },
+        rejectReason(a){
+          if (a.size === 'large' || a.size === 'xlarge') return 'Passar bättre för mindre gräsytor än din.';
+          if (a.wireless === 'yes') return 'Du vill slippa slinga, och det här är inte det starkaste valet för det.';
+          return 'Bra modell, men andra alternativ matchar dina svar bättre.';
+        },
+        whyFit(a){
+          const reasons = [];
+          if (a.size === 'small') reasons.push('Bra match för mindre gräsyta');
+          if (a.budget === 'low' || a.budget === 'mid') reasons.push('Passar din budgetnivå');
+          reasons.push('Låg ljudnivå för enkel vardagsanvändning');
+          return reasons.slice(0,3);
         }
       },
       {
         name: 'Worx Landroid M500',
-        tags: ['Budget', 'Prisvärd', 'Liten tomt'],
-        description: 'Passar dig som vill komma igång till lägre pris och har en enklare tomt.',
+        tags: ['Budget', 'Prisvärd', 'Mindre ytor'],
+        description: 'Passar dig som vill komma igång till lägre pris och har en enklare gräsyta.',
         score(a){
           let s = 0;
           if (a.budget === 'low') s += 5;
           if (a.size === 'small' || a.size === 'medium') s += 3;
           if (a.slope === 'flat') s += 2;
           return s;
+        },
+        rejectReason(a){
+          if (a.slope === 'steep') return 'Inte lika stark för brantare lutning.';
+          if (a.passages === 'yes') return 'Det finns bättre val för smala passager.';
+          return 'Billig och bra, men inte den starkaste matchningen här.';
+        },
+        whyFit(a){
+          const reasons = [];
+          if (a.budget === 'low') reasons.push('Bra om du vill hålla nere budgeten');
+          if (a.size === 'small' || a.size === 'medium') reasons.push('Passar mindre till medelstor gräsyta');
+          reasons.push('Bra första alternativ för enklare behov');
+          return reasons.slice(0,3);
         }
       },
       {
         name: 'Husqvarna Automower 305',
         tags: ['Smala passager', 'Kompakt', 'Premium'],
-        description: 'Starkt val för mindre till medelstora tomter där navigation och kvalitet väger tungt.',
+        description: 'Starkt val för mindre till medelstora gräsytor där navigation och kvalitet väger tungt.',
         score(a){
           let s = 0;
           if (a.size === 'small' || a.size === 'medium') s += 4;
@@ -744,12 +810,24 @@
           if (a.budget === 'mid') s += 3;
           if (a.budget === 'high') s += 2;
           return s;
+        },
+        rejectReason(a){
+          if (a.size === 'large' || a.size === 'xlarge') return 'Det finns bättre val för större gräsytor.';
+          if (a.wireless === 'yes') return 'Du vill slippa slinga, vilket drar upp andra alternativ.';
+          return 'Bra modell, men andra modeller passar din situation ännu bättre.';
+        },
+        whyFit(a){
+          const reasons = [];
+          if (a.passages === 'yes') reasons.push('Bra för smala passager');
+          if (a.size === 'small' || a.size === 'medium') reasons.push('Rätt kapacitet för din gräsyta');
+          reasons.push('Stark navigation och driftsäkerhet');
+          return reasons.slice(0,3);
         }
       },
       {
         name: 'Husqvarna Automower 415X',
-        tags: ['Bäst balans', 'Passager', 'Kuperad tomt'],
-        description: 'Bra allroundval för medelstora tomter med smala passager och lite tuffare förutsättningar.',
+        tags: ['Bäst balans', 'Passager', 'Kuperad gräsyta'],
+        description: 'Bra allroundval för medelstora gräsytor med smala passager och lite tuffare förutsättningar.',
         score(a){
           let s = 0;
           if (a.size === 'medium' || a.size === 'large') s += 4;
@@ -757,36 +835,72 @@
           if (a.slope === 'medium' || a.slope === 'steep') s += 3;
           if (a.budget === 'high' || a.budget === 'premium') s += 3;
           return s;
+        },
+        rejectReason(a){
+          if (a.budget === 'low') return 'Stark modell, men dyrare än vad din budget pekar mot.';
+          if (a.wireless === 'yes') return 'Du prioriterar att slippa slinga, vilket ger andra modeller fördel.';
+          return 'Bra allroundval, men inte toppmatch mot dina svar.';
+        },
+        whyFit(a){
+          const reasons = [];
+          if (a.passages === 'yes') reasons.push('Passar bra vid smala passager');
+          if (a.slope === 'medium' || a.slope === 'steep') reasons.push('Klarar mer utmanande gräsyta');
+          if (a.size === 'medium' || a.size === 'large') reasons.push('Bra kapacitet för din gräsyta');
+          return reasons.slice(0,3);
         }
       },
       {
         name: 'Segway Navimow i105E',
         tags: ['Utan slinga', 'Modern app', 'Smidig'],
-        description: 'Bra alternativ för mindre till medelstora tomter om du vill slippa begränsningskabel.',
+        description: 'Bra alternativ för mindre till medelstora gräsytor om du vill slippa begränsningskabel.',
         score(a){
           let s = 0;
           if (a.wireless === 'yes') s += 6;
           if (a.size === 'small' || a.size === 'medium') s += 3;
           if (a.budget === 'mid' || a.budget === 'high') s += 3;
           return s;
+        },
+        rejectReason(a){
+          if (a.wireless === 'no') return 'Du behöver inte en modell som fokuserar på att vara utan slinga.';
+          if (a.size === 'xlarge') return 'Det finns bättre val för större gräsytor.';
+          return 'Bra val, men andra modeller passar dina svar bättre.';
+        },
+        whyFit(a){
+          const reasons = [];
+          if (a.wireless === 'yes') reasons.push('Du vill slippa slinga');
+          if (a.size === 'small' || a.size === 'medium') reasons.push('Bra för mindre till medelstor gräsyta');
+          reasons.push('Enkel och modern appstyrning');
+          return reasons.slice(0,3);
         }
       },
       {
         name: 'Segway Navimow i108E',
-        tags: ['Utan slinga', 'Större tomt', 'Modern'],
-        description: 'Starkt val om du vill ha en kabel-fri lösning för medelstor till större tomt.',
+        tags: ['Utan slinga', 'Större gräsyta', 'Modern'],
+        description: 'Starkt val om du vill ha en kabel-fri lösning för medelstor till större gräsyta.',
         score(a){
           let s = 0;
           if (a.wireless === 'yes') s += 6;
           if (a.size === 'medium' || a.size === 'large') s += 4;
           if (a.budget === 'high' || a.budget === 'premium') s += 3;
           return s;
+        },
+        rejectReason(a){
+          if (a.wireless === 'no') return 'Du behöver inte betala extra för att slippa slinga.';
+          if (a.budget === 'low') return 'Priset matchar sämre mot din budget.';
+          return 'Bra modell, men andra alternativ passar dina svar bättre.';
+        },
+        whyFit(a){
+          const reasons = [];
+          if (a.wireless === 'yes') reasons.push('Du prioriterar att slippa slinga');
+          if (a.size === 'medium' || a.size === 'large') reasons.push('Passar din gräsyta bättre');
+          reasons.push('Bra kombination av teknik och användarvänlighet');
+          return reasons.slice(0,3);
         }
       },
       {
         name: 'Husqvarna Automower 430X NERA',
-        tags: ['Premium', 'Stor tomt', 'Kuperad'],
-        description: 'För större eller mer krävande tomter där prestanda, navigering och kapacitet är viktigast.',
+        tags: ['Premium', 'Stor gräsyta', 'Kuperad'],
+        description: 'För större eller mer krävande gräsytor där prestanda, navigering och kapacitet är viktigast.',
         score(a){
           let s = 0;
           if (a.size === 'large' || a.size === 'xlarge') s += 5;
@@ -794,6 +908,18 @@
           if (a.budget === 'premium') s += 5;
           if (a.passages === 'yes') s += 2;
           return s;
+        },
+        rejectReason(a){
+          if (a.budget !== 'premium') return 'Troligen mer kapacitet och högre pris än du behöver.';
+          if (a.size === 'small') return 'Onödigt kraftfull för en mindre gräsyta.';
+          return 'Stark modell, men inte det mest balanserade valet här.';
+        },
+        whyFit(a){
+          const reasons = [];
+          if (a.size === 'large' || a.size === 'xlarge') reasons.push('Kapacitet för större gräsyta');
+          if (a.slope === 'steep') reasons.push('Bättre för mer utmanande lutning');
+          if (a.budget === 'premium') reasons.push('Passar din högre budget');
+          return reasons.slice(0,3);
         }
       }
     ];
@@ -809,6 +935,8 @@
     const stepLabel = document.getElementById('stepLabel');
     const answersPreview = document.getElementById('answersPreview');
     const resultsGrid = document.getElementById('resultsGrid');
+    const rejectedGrid = document.getElementById('rejectedGrid');
+    const resultSummary = document.getElementById('resultSummary');
     const restartBtn = document.getElementById('restartBtn');
 
     function renderAnswersPreview(){
@@ -855,25 +983,45 @@
       }
     }
 
-    function getRecommendations(){
+    function getRankedModels(){
       return models
         .map(function(model){
           return {
             name: model.name,
             tags: model.tags,
             description: model.description,
+            whyFit: model.whyFit(state),
+            rejectReason: model.rejectReason(state),
             points: model.score(state)
           };
         })
-        .sort(function(a,b){ return b.points - a.points; })
-        .slice(0,3);
+        .sort(function(a,b){ return b.points - a.points; });
+    }
+
+    function makeSummary(){
+      const bits = [];
+      const size = questions[0].options.find(o => o.value === state.size);
+      if (size) bits.push(size.label + ' gräsyta');
+
+      if (state.passages === 'yes') bits.push('behov av passager');
+      if (state.slope === 'steep') bits.push('brant lutning');
+      else if (state.slope === 'medium') bits.push('viss lutning');
+
+      if (state.wireless === 'yes') bits.push('önskemål om att slippa slinga');
+
+      return 'För dig med ' + bits.join(', ') + ' rekommenderar vi följande modeller.';
     }
 
     function showResults(){
-      const recs = getRecommendations();
+      const ranked = getRankedModels();
+      const recs = ranked.slice(0, 3);
+      const rejected = ranked.slice(3, 5);
+
       questionState.hidden = true;
       resultState.hidden = false;
       resultsGrid.innerHTML = '';
+      rejectedGrid.innerHTML = '';
+      resultSummary.textContent = makeSummary();
 
       for (let i = 0; i < recs.length; i++) {
         const item = recs[i];
@@ -882,12 +1030,27 @@
         card.innerHTML =
           '<h4>' + (i + 1) + '. ' + item.name + '</h4>' +
           '<p>' + item.description + '</p>' +
+          '<ul class="reason-list">' +
+            item.whyFit.map(function(reason){
+              return '<li>✓ ' + reason + '</li>';
+            }).join('') +
+          '</ul>' +
           '<div class="result-tags">' +
             item.tags.map(function(tag){
               return '<span class="tag">' + tag + '</span>';
             }).join('') +
           '</div>';
         resultsGrid.appendChild(card);
+      }
+
+      for (let i = 0; i < rejected.length; i++) {
+        const item = rejected[i];
+        const card = document.createElement('div');
+        card.className = 'rejected-card';
+        card.innerHTML =
+          '<h4>' + item.name + '</h4>' +
+          '<p>' + item.rejectReason + '</p>';
+        rejectedGrid.appendChild(card);
       }
     }
 
