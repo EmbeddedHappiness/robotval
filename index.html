@@ -463,4 +463,448 @@
         grid-template-columns:1fr;
       }
 
-      .card
+      .card,
+      .wizard-card,
+      .info-card,
+      .mini-card{
+        border-radius:22px;
+      }
+
+      .question{
+        font-size:24px;
+      }
+
+      .section{
+        padding:48px 0;
+      }
+
+      .card-head{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">RobotVal.se</div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Hitta rätt snabbare</div>
+          <h1>Hitta rätt robotgräsklippare på 60 sekunder</h1>
+          <p class="lead">
+            Undvik felköp. Få rätt modell baserat på tomt, budget och behov — utan att läsa tester och jämföra allt själv.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="#wizard">Starta gratis guide</a>
+            <a class="btn btn-secondary" href="#exempel">Se exempel</a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-pill">Gratis att använda</div>
+            <div class="trust-pill">Anpassat för svenska tomter</div>
+            <div class="trust-pill">Tar ca 1 minut</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <p class="muted">Exempel på rekommendation</p>
+              <h2>För 800 kvm + smal passage</h2>
+            </div>
+            <div class="badge">Topp 3</div>
+          </div>
+
+          <div class="example-list">
+            <div class="example-item">
+              <h3>Husqvarna Automower 415X</h3>
+              <p>Starkt val för medelstora tomter med smala passager, bra navigation och hög driftsäkerhet.</p>
+            </div>
+            <div class="example-item">
+              <h3>Segway Navimow i108E</h3>
+              <p>Passar dig som vill slippa begränsningskabel och få enkel, modern appstyrning.</p>
+            </div>
+            <div class="example-item">
+              <h3>Gardena Sileno City</h3>
+              <p>Bra alternativ om du prioriterar låg ljudnivå och enkel vardagsanvändning på mindre ytor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="grid-3">
+        <div class="info-card">
+          <h3>1 minut att förstå</h3>
+          <p>Du svarar på några enkla frågor och får snabbare rätt riktning.</p>
+        </div>
+        <div class="info-card">
+          <h3>Mindre risk för felköp</h3>
+          <p>Ta hänsyn till passage, lutning, pris och om du vill slippa slinga.</p>
+        </div>
+        <div class="info-card">
+          <h3>Byggd för köpbeslut</h3>
+          <p>Målet är inte mer läsning, utan ett bättre val.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="wizard" class="section">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">Guiden</div>
+        <h2>Få ett första val direkt</h2>
+        <p class="lead" style="margin-top:14px">
+          Svara på några frågor om din tomt och dina behov. När du är klar får du tre rekommenderade modeller direkt.
+        </p>
+      </div>
+
+      <div class="wizard-wrap">
+        <div class="wizard-card">
+          <div id="questionState">
+            <div class="progress-meta">
+              <span id="stepLabel">Fråga 1 av 5</span>
+              <span>Tar ca 1 minut</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <h3 class="question" id="questionText">Hur stor är din tomt?</h3>
+            <div class="option-grid" id="options">
+              <button type="button" class="option">Under 300 kvm</button>
+              <button type="button" class="option">300–700 kvm</button>
+              <button type="button" class="option">700–1200 kvm</button>
+              <button type="button" class="option">1200+ kvm</button>
+            </div>
+          </div>
+
+          <div id="resultState" hidden>
+            <div class="progress-meta">
+              <span>Dina rekommendationer</span>
+              <span>Klar</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" style="width:100%"></div>
+            </div>
+
+            <h3 class="question">Vi rekommenderar dessa modeller</h3>
+            <p class="lead" style="font-size:16px;margin-top:0">
+              Baserat på dina svar har vi valt tre modeller som bör passa din situation bäst.
+            </p>
+
+            <div class="results-grid" id="resultsGrid"></div>
+
+            <div class="result-actions">
+              <button class="btn btn-primary" id="restartBtn" type="button">Gör om guiden</button>
+              <a class="btn btn-secondary" href="mailto:hej@robotval.se?subject=Fråga%20om%20RobotVal">Ställ en fråga</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="wizard-side">
+          <div class="mini-card">
+            <h3>Vad vi väger in</h3>
+            <p>Tomtstorlek, budget, smala passager, lutning och om du vill slippa begränsningsslinga.</p>
+          </div>
+
+          <div class="mini-card">
+            <h3>Dina svar</h3>
+            <div class="answers-list" id="answersPreview"></div>
+          </div>
+
+          <div class="mini-card">
+            <h3>Tips</h3>
+            <p>Har du smala passager eller kuperad tomt är det ofta värt att prioritera navigation och driftsäkerhet framför lägsta pris.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="exempel" class="section">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">Exempel</div>
+        <h2>Ett bättre sätt att välja robotgräsklippare</h2>
+        <p class="lead" style="margin-top:14px">
+          I stället för att läsa flera guider själv får du ett tydligare val utifrån din situation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>© 2026 RobotVal.se</div>
+      <div>Uppdaterad april 2026</div>
+    </div>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        key: 'size',
+        label: 'Tomt',
+        text: 'Hur stor är din tomt?',
+        options: [
+          { value: 'small', label: 'Under 300 kvm' },
+          { value: 'medium', label: '300–700 kvm' },
+          { value: 'large', label: '700–1200 kvm' },
+          { value: 'xlarge', label: '1200+ kvm' }
+        ]
+      },
+      {
+        key: 'budget',
+        label: 'Budget',
+        text: 'Vilken budget har du?',
+        options: [
+          { value: 'low', label: 'Under 10 000 kr' },
+          { value: 'mid', label: '10 000–20 000 kr' },
+          { value: 'high', label: '20 000–35 000 kr' },
+          { value: 'premium', label: '35 000+ kr' }
+        ]
+      },
+      {
+        key: 'passages',
+        label: 'Smala passager',
+        text: 'Har du smala passager?',
+        options: [
+          { value: 'yes', label: 'Ja' },
+          { value: 'no', label: 'Nej' }
+        ]
+      },
+      {
+        key: 'slope',
+        label: 'Lutning',
+        text: 'Är tomten kuperad?',
+        options: [
+          { value: 'flat', label: 'Mest platt' },
+          { value: 'medium', label: 'Lite lutning' },
+          { value: 'steep', label: 'Ganska brant' }
+        ]
+      },
+      {
+        key: 'wireless',
+        label: 'Utan slinga',
+        text: 'Vill du slippa slinga?',
+        options: [
+          { value: 'yes', label: 'Ja' },
+          { value: 'no', label: 'Nej' },
+          { value: 'any', label: 'Spelar ingen roll' }
+        ]
+      }
+    ];
+
+    const models = [
+      {
+        name: 'Gardena Sileno City',
+        tags: ['Tyst', 'Liten tomt', 'Enkel'],
+        description: 'Bra val för mindre tomter där låg ljudnivå och enkel vardagsanvändning är viktigast.',
+        score(a){
+          let s = 0;
+          if (a.size === 'small') s += 5;
+          if (a.budget === 'low') s += 3;
+          if (a.budget === 'mid') s += 2;
+          if (a.passages === 'yes') s += 2;
+          if (a.wireless === 'no') s += 1;
+          return s;
+        }
+      },
+      {
+        name: 'Worx Landroid M500',
+        tags: ['Budget', 'Prisvärd', 'Liten tomt'],
+        description: 'Passar dig som vill komma igång till lägre pris och har en enklare tomt.',
+        score(a){
+          let s = 0;
+          if (a.budget === 'low') s += 5;
+          if (a.size === 'small' || a.size === 'medium') s += 3;
+          if (a.slope === 'flat') s += 2;
+          return s;
+        }
+      },
+      {
+        name: 'Husqvarna Automower 305',
+        tags: ['Smala passager', 'Kompakt', 'Premium'],
+        description: 'Starkt val för mindre till medelstora tomter där navigation och kvalitet väger tungt.',
+        score(a){
+          let s = 0;
+          if (a.size === 'small' || a.size === 'medium') s += 4;
+          if (a.passages === 'yes') s += 4;
+          if (a.budget === 'mid') s += 3;
+          if (a.budget === 'high') s += 2;
+          return s;
+        }
+      },
+      {
+        name: 'Husqvarna Automower 415X',
+        tags: ['Bäst balans', 'Passager', 'Kuperad tomt'],
+        description: 'Bra allroundval för medelstora tomter med smala passager och lite tuffare förutsättningar.',
+        score(a){
+          let s = 0;
+          if (a.size === 'medium' || a.size === 'large') s += 4;
+          if (a.passages === 'yes') s += 4;
+          if (a.slope === 'medium' || a.slope === 'steep') s += 3;
+          if (a.budget === 'high' || a.budget === 'premium') s += 3;
+          return s;
+        }
+      },
+      {
+        name: 'Segway Navimow i105E',
+        tags: ['Utan slinga', 'Modern app', 'Smidig'],
+        description: 'Bra alternativ för mindre till medelstora tomter om du vill slippa begränsningskabel.',
+        score(a){
+          let s = 0;
+          if (a.wireless === 'yes') s += 6;
+          if (a.size === 'small' || a.size === 'medium') s += 3;
+          if (a.budget === 'mid' || a.budget === 'high') s += 3;
+          return s;
+        }
+      },
+      {
+        name: 'Segway Navimow i108E',
+        tags: ['Utan slinga', 'Större tomt', 'Modern'],
+        description: 'Starkt val om du vill ha en kabel-fri lösning för medelstor till större tomt.',
+        score(a){
+          let s = 0;
+          if (a.wireless === 'yes') s += 6;
+          if (a.size === 'medium' || a.size === 'large') s += 4;
+          if (a.budget === 'high' || a.budget === 'premium') s += 3;
+          return s;
+        }
+      },
+      {
+        name: 'Husqvarna Automower 430X NERA',
+        tags: ['Premium', 'Stor tomt', 'Kuperad'],
+        description: 'För större eller mer krävande tomter där prestanda, navigering och kapacitet är viktigast.',
+        score(a){
+          let s = 0;
+          if (a.size === 'large' || a.size === 'xlarge') s += 5;
+          if (a.slope === 'steep') s += 4;
+          if (a.budget === 'premium') s += 5;
+          if (a.passages === 'yes') s += 2;
+          return s;
+        }
+      }
+    ];
+
+    const state = {};
+    let currentStep = 0;
+
+    const questionState = document.getElementById('questionState');
+    const resultState = document.getElementById('resultState');
+    const questionText = document.getElementById('questionText');
+    const optionsEl = document.getElementById('options');
+    const progressBar = document.getElementById('progressBar');
+    const stepLabel = document.getElementById('stepLabel');
+    const answersPreview = document.getElementById('answersPreview');
+    const resultsGrid = document.getElementById('resultsGrid');
+    const restartBtn = document.getElementById('restartBtn');
+
+    function renderAnswersPreview(){
+      answersPreview.innerHTML = '';
+      for (let i = 0; i < questions.length; i++) {
+        const q = questions[i];
+        const selected = q.options.find(o => o.value === state[q.key]);
+        const row = document.createElement('div');
+        row.className = 'answer-row';
+        row.innerHTML =
+          '<span class="answer-label">' + q.label + '</span>' +
+          '<span class="answer-value">' + (selected ? selected.label : '–') + '</span>';
+        answersPreview.appendChild(row);
+      }
+    }
+
+    function renderQuestion(){
+      const q = questions[currentStep];
+      const pct = ((currentStep + 1) / questions.length) * 100;
+
+      stepLabel.textContent = 'Fråga ' + (currentStep + 1) + ' av ' + questions.length;
+      progressBar.style.width = pct + '%';
+      questionText.textContent = q.text;
+      optionsEl.innerHTML = '';
+
+      for (let i = 0; i < q.options.length; i++) {
+        const option = q.options[i];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option';
+        btn.textContent = option.label;
+        btn.onclick = function () {
+          state[q.key] = option.value;
+          renderAnswersPreview();
+
+          if (currentStep < questions.length - 1) {
+            currentStep += 1;
+            renderQuestion();
+          } else {
+            showResults();
+          }
+        };
+        optionsEl.appendChild(btn);
+      }
+    }
+
+    function getRecommendations(){
+      return models
+        .map(function(model){
+          return {
+            name: model.name,
+            tags: model.tags,
+            description: model.description,
+            points: model.score(state)
+          };
+        })
+        .sort(function(a,b){ return b.points - a.points; })
+        .slice(0,3);
+    }
+
+    function showResults(){
+      const recs = getRecommendations();
+      questionState.hidden = true;
+      resultState.hidden = false;
+      resultsGrid.innerHTML = '';
+
+      for (let i = 0; i < recs.length; i++) {
+        const item = recs[i];
+        const card = document.createElement('div');
+        card.className = 'result-card';
+        card.innerHTML =
+          '<h4>' + (i + 1) + '. ' + item.name + '</h4>' +
+          '<p>' + item.description + '</p>' +
+          '<div class="result-tags">' +
+            item.tags.map(function(tag){
+              return '<span class="tag">' + tag + '</span>';
+            }).join('') +
+          '</div>';
+        resultsGrid.appendChild(card);
+      }
+    }
+
+    function restartWizard(){
+      currentStep = 0;
+      for (const key in state) delete state[key];
+      resultState.hidden = true;
+      questionState.hidden = false;
+      renderAnswersPreview();
+      renderQuestion();
+      document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    restartBtn.onclick = restartWizard;
+
+    renderAnswersPreview();
+    renderQuestion();
+  </script>
+</body>
+</html>
