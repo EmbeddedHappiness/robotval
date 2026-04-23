@@ -112,6 +112,11 @@
       font-size:16px;
       border:1px solid transparent;
       cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
     }
 
     .btn-primary{
@@ -124,6 +129,18 @@
       background:#fff;
       color:#334155;
       border-color:#cbd5e1;
+    }
+
+    .btn-success{
+      background:var(--green);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .btn-light{
+      background:#f8fafc;
+      color:#334155;
+      border:1px solid var(--line);
     }
 
     .trust-row{
@@ -256,19 +273,6 @@
       line-height:1.7;
     }
 
-    .step-num{
-      width:40px;
-      height:40px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      background:#d1fae5;
-      color:var(--green-dark);
-      font-weight:800;
-      margin-bottom:14px;
-    }
-
     .wizard-wrap{
       display:grid;
       grid-template-columns:1.08fr .92fr;
@@ -380,6 +384,7 @@
       font-size:16px;
       cursor:pointer;
       box-shadow:0 6px 18px rgba(15,23,42,.04);
+      transition:.18s ease;
     }
 
     .option:hover{
@@ -456,6 +461,13 @@
       border-radius:999px;
       font-size:12px;
       font-weight:700;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
     }
 
     .subheading{
@@ -666,8 +678,8 @@
           </div>
 
           <div class="mini-card">
-            <h3>Tips</h3>
-            <p>Har du smala passager eller kuperad gräsyta är det ofta värt att prioritera navigation och driftsäkerhet framför lägsta pris.</p>
+            <h3>Nästa steg</h3>
+            <p>När du fått dina rekommendationer kan du klicka vidare och jämföra priser hos återförsäljare.</p>
           </div>
         </div>
       </div>
@@ -747,6 +759,16 @@
         ]
       }
     ];
+
+    const priceLinks = {
+      'Gardena Sileno City': 'https://www.google.com/search?q=Gardena+Sileno+City+pris',
+      'Worx Landroid M500': 'https://www.google.com/search?q=Worx+Landroid+M500+pris',
+      'Husqvarna Automower 305': 'https://www.google.com/search?q=Husqvarna+Automower+305+pris',
+      'Husqvarna Automower 415X': 'https://www.google.com/search?q=Husqvarna+Automower+415X+pris',
+      'Segway Navimow i105E': 'https://www.google.com/search?q=Segway+Navimow+i105E+pris',
+      'Segway Navimow i108E': 'https://www.google.com/search?q=Segway+Navimow+i108E+pris',
+      'Husqvarna Automower 430X NERA': 'https://www.google.com/search?q=Husqvarna+Automower+430X+NERA+pris'
+    };
 
     const models = [
       {
@@ -992,6 +1014,7 @@
             description: model.description,
             whyFit: model.whyFit(state),
             rejectReason: model.rejectReason(state),
+            priceUrl: priceLinks[model.name] || 'https://www.google.com/search?q=' + encodeURIComponent(model.name + ' pris'),
             points: model.score(state)
           };
         })
@@ -1039,6 +1062,10 @@
             item.tags.map(function(tag){
               return '<span class="tag">' + tag + '</span>';
             }).join('') +
+          '</div>' +
+          '<div class="cta-row">' +
+            '<a class="btn btn-success" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Se pris hos butik</a>' +
+            '<a class="btn btn-light" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Sök fler butiker</a>' +
           '</div>';
         resultsGrid.appendChild(card);
       }
