@@ -530,6 +530,12 @@
       }
     }
   </style>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-1ab8m-VdY3tGLSlvKRZ39.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
 </head>
 <body>
   <section class="hero">
@@ -547,7 +553,7 @@
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" href="#wizard">Starta gratis guide</a>
+            <a class="btn btn-primary" href="#wizard" onclick="plausible('Guide Start')" >Starta gratis guide</a>
             <a class="btn btn-secondary" href="#exempel">Se exempel</a>
           </div>
 
@@ -1044,6 +1050,7 @@
     }
 
     function showResults(){
+      plausible('Resultat Visat');
       trackMetric('resultsShown');
       const ranked = getRankedModels();
       const recs = ranked.slice(0, 3);
@@ -1073,8 +1080,8 @@
             }).join('') +
           '</div>' +
           '<div class="cta-row">' +
-            '<a class="btn btn-success price-link" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Se pris hos butik</a>' +
-            '<a class="btn btn-light compare-link" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer">Jämför priser</a>' +
+            '<a class="btn btn-success price-link" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer" onclick="plausible('Pris Klick')">Se pris hos butik</a>' +
+            '<a class="btn btn-light compare-link" href="' + item.priceUrl + '" target="_blank" rel="noopener noreferrer" onclick="plausible('Jamfor Klick')">Jämför priser</a>' +
           '</div>';
         resultsGrid.appendChild(card);
         
