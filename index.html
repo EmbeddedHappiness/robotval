@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RobotVal.se – Hitta rätt robotgräsklippare</title>
-  <meta name="description" content="Hitta rätt robotgräsklippare på 60 sekunder. Jämför smartare utifrån tomt, budget och behov.">
+  <meta name="description" content="Hitta rätt robotgräsklippare på 60 sekunder.">
   <style>
     :root{
       --bg:#f8fbf8;
@@ -15,18 +15,15 @@
       --green:#10b981;
       --green-dark:#047857;
       --dark:#0f172a;
-      --dark-soft:#1e293b;
-      --soft:#ecfdf5;
       --shadow:0 10px 30px rgba(15,23,42,.08);
-      --radius:22px;
-      --max:1120px;
+      --max:1100px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:var(--bg);
       color:var(--text);
       line-height:1.5;
@@ -34,6 +31,9 @@
 
     a{text-decoration:none;color:inherit}
     button{font:inherit}
+
+    [hidden]{display:none !important}
+
     .container{
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
@@ -42,16 +42,15 @@
     .hero{
       background:
         radial-gradient(circle at top left, rgba(16,185,129,.12), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(15,23,42,.06), transparent 30%),
         linear-gradient(to bottom, #ecfdf5, #ffffff 45%);
-      padding:20px 0 56px;
       border-bottom:1px solid var(--line);
+      padding:20px 0 52px;
     }
 
     .topbar{
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
       gap:16px;
       padding:8px 0 20px;
     }
@@ -59,29 +58,21 @@
     .brand{
       display:inline-flex;
       align-items:center;
-      gap:10px;
       background:#fff;
       border:1px solid #bbf7d0;
       color:var(--green-dark);
       padding:10px 14px;
       border-radius:999px;
       font-weight:700;
+      font-size:14px;
       box-shadow:var(--shadow);
-      font-size:14px;
-    }
-
-    .topmeta{
-      color:#64748b;
-      font-size:14px;
-      display:none;
     }
 
     .hero-grid{
       display:grid;
       grid-template-columns:1.1fr .9fr;
-      gap:32px;
+      gap:28px;
       align-items:center;
-      padding-top:12px;
     }
 
     .eyebrow{
@@ -94,14 +85,14 @@
 
     h1{
       margin:14px 0 0;
-      font-size:clamp(38px, 7vw, 64px);
+      font-size:clamp(38px, 7vw, 62px);
       line-height:1.02;
       letter-spacing:-0.03em;
     }
 
     .lead{
-      margin:22px 0 0;
-      max-width:640px;
+      margin:20px 0 0;
+      max-width:650px;
       font-size:clamp(18px, 3vw, 22px);
       color:var(--muted);
       line-height:1.7;
@@ -110,7 +101,7 @@
     .actions{
       display:flex;
       flex-wrap:wrap;
-      gap:14px;
+      gap:12px;
       margin-top:28px;
     }
 
@@ -122,7 +113,6 @@
       border-radius:18px;
       font-weight:700;
       font-size:16px;
-      transition:.2s ease;
       border:1px solid transparent;
       cursor:pointer;
     }
@@ -133,16 +123,14 @@
       box-shadow:var(--shadow);
     }
 
-    .btn-primary:hover{transform:translateY(-1px);opacity:.96}
     .btn-secondary{
       background:#fff;
       color:#334155;
       border-color:#cbd5e1;
     }
-    .btn-secondary:hover{background:#f8fafc}
 
     .trust-row{
-      margin-top:28px;
+      margin-top:24px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:12px;
@@ -153,26 +141,26 @@
       border:1px solid var(--line);
       border-radius:18px;
       padding:14px 16px;
-      box-shadow:var(--shadow);
+      text-align:center;
       font-size:14px;
       font-weight:600;
       color:#334155;
-      text-align:center;
+      box-shadow:var(--shadow);
     }
 
     .card{
-      background:var(--card);
+      background:#fff;
       border:1px solid var(--line);
-      border-radius:30px;
-      box-shadow:0 24px 50px rgba(15,23,42,.10);
+      border-radius:28px;
       padding:20px;
+      box-shadow:0 24px 50px rgba(15,23,42,.10);
     }
 
     .card-head{
       display:flex;
-      align-items:flex-start;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
+      align-items:flex-start;
       padding-bottom:14px;
       border-bottom:1px solid #f1f5f9;
     }
@@ -190,61 +178,42 @@
     }
 
     .badge{
-      white-space:nowrap;
       background:#d1fae5;
       color:var(--green-dark);
       font-size:13px;
       font-weight:700;
       padding:8px 12px;
       border-radius:999px;
+      white-space:nowrap;
     }
 
-    .result-list{
-      margin-top:16px;
+    .example-list{
       display:flex;
       flex-direction:column;
       gap:14px;
+      margin-top:16px;
     }
 
-    .example-result{
+    .example-item{
       border:1px solid var(--line);
-      border-radius:20px;
-      padding:16px;
-      background:#fff;
+      border-radius:18px;
+      padding:14px;
     }
 
-    .example-result-top{
-      display:flex;
-      justify-content:space-between;
-      gap:14px;
-      align-items:flex-start;
-    }
-
-    .example-result h3{
+    .example-item h3{
       margin:0;
       font-size:17px;
-      line-height:1.3;
     }
 
-    .example-result p{
+    .example-item p{
       margin:8px 0 0;
       color:var(--muted);
       font-size:14px;
       line-height:1.65;
     }
 
-    .small-badge{
-      background:#f1f5f9;
-      color:#334155;
-      font-size:12px;
-      font-weight:700;
-      padding:7px 10px;
-      border-radius:999px;
-      white-space:nowrap;
-    }
-
     .section{
-      padding:68px 0;
+      padding:60px 0;
     }
 
     .section-alt{
@@ -253,24 +222,14 @@
       border-bottom:1px solid var(--line);
     }
 
-    .section-dark{
-      background:var(--dark);
-      color:#fff;
-    }
-
-    .section-dark .lead,
-    .section-dark p{
-      color:#cbd5e1;
-    }
-
     .section-title{
       max-width:760px;
-      margin-bottom:28px;
+      margin-bottom:24px;
     }
 
     .section-title h2{
       margin-top:10px;
-      font-size:clamp(30px, 4vw, 44px);
+      font-size:clamp(30px, 4vw, 42px);
       letter-spacing:-0.02em;
     }
 
@@ -283,8 +242,8 @@
     .info-card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:28px;
-      padding:24px;
+      border-radius:24px;
+      padding:22px;
       box-shadow:var(--shadow);
     }
 
@@ -301,8 +260,8 @@
     }
 
     .step-num{
-      width:42px;
-      height:42px;
+      width:40px;
+      height:40px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -310,128 +269,23 @@
       background:#d1fae5;
       color:var(--green-dark);
       font-weight:800;
-      font-size:18px;
-      margin-bottom:16px;
-    }
-
-    .dark-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:28px;
-      align-items:start;
-    }
-
-    .needs-box{
-      background:#1e293b;
-      border:1px solid #334155;
-      border-radius:28px;
-      padding:24px;
-    }
-
-    .needs-wrap{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .need{
-      border:1px solid #475569;
-      background:#0f172a;
-      color:#e2e8f0;
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:14px;
-      font-weight:600;
-    }
-
-    .cta-box{
-      background:linear-gradient(135deg, #34d399, #10b981);
-      color:#052e16;
-      border-radius:32px;
-      padding:32px 24px;
-      box-shadow:0 30px 50px rgba(16,185,129,.22);
-    }
-
-    .cta-box p{
-      color:rgba(5,46,22,.8);
+      margin-bottom:14px;
     }
 
     .wizard-wrap{
-      margin-top:28px;
       display:grid;
       grid-template-columns:1.1fr .9fr;
-      gap:24px;
+      gap:22px;
       align-items:start;
+      margin-top:24px;
     }
 
     .wizard-card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:30px;
+      border-radius:28px;
       padding:22px;
       box-shadow:0 24px 50px rgba(15,23,42,.08);
-    }
-
-    .progress-meta{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      font-size:14px;
-      color:#64748b;
-      margin-bottom:12px;
-    }
-
-    .progress{
-      width:100%;
-      height:12px;
-      background:#e2e8f0;
-      border-radius:999px;
-      overflow:hidden;
-      margin-bottom:24px;
-    }
-
-    .progress-bar{
-      height:100%;
-      width:20%;
-      background:linear-gradient(90deg, #34d399, #10b981);
-      border-radius:999px;
-      transition:width .25s ease;
-    }
-
-    .question{
-      font-size:28px;
-      font-weight:800;
-      line-height:1.2;
-      margin:0 0 18px;
-      letter-spacing:-0.02em;
-    }
-
-    .option-grid{
-      display:grid;
-      gap:12px;
-    }
-
-    .option{
-      width:100%;
-      text-align:left;
-      border:1px solid var(--line);
-      background:#fff;
-      color:#0f172a;
-      border-radius:20px;
-      padding:16px 18px;
-      font-weight:700;
-      font-size:16px;
-      cursor:pointer;
-      transition:.18s ease;
-      box-shadow:0 6px 18px rgba(15,23,42,.04);
-    }
-
-    .option:hover{
-      border-color:#86efac;
-      background:#f0fdf4;
-      transform:translateY(-1px);
     }
 
     .wizard-side{
@@ -443,8 +297,8 @@
     .mini-card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:24px;
-      padding:20px;
+      border-radius:22px;
+      padding:18px;
       box-shadow:var(--shadow);
     }
 
@@ -464,14 +318,13 @@
       display:flex;
       flex-direction:column;
       gap:10px;
-      margin-top:10px;
     }
 
     .answer-row{
       display:flex;
       justify-content:space-between;
-      gap:16px;
-      padding:10px 0;
+      gap:12px;
+      padding:8px 0;
       border-bottom:1px solid #f1f5f9;
       font-size:14px;
     }
@@ -481,21 +334,74 @@
     .answer-label{color:#64748b}
     .answer-value{font-weight:700;color:#0f172a;text-align:right}
 
-    [hidden]{
-      display:none !important;
+    .progress-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:14px;
+      color:#64748b;
+      margin-bottom:12px;
+    }
+
+    .progress{
+      width:100%;
+      height:12px;
+      background:#e2e8f0;
+      border-radius:999px;
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+
+    .progress-bar{
+      height:100%;
+      background:linear-gradient(90deg, #34d399, #10b981);
+      width:20%;
+      transition:width .25s ease;
+    }
+
+    .question{
+      font-size:28px;
+      font-weight:800;
+      line-height:1.2;
+      margin:0 0 16px;
+      letter-spacing:-0.02em;
+    }
+
+    .option-grid{
+      display:grid;
+      gap:12px;
+    }
+
+    .option{
+      width:100%;
+      text-align:left;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#0f172a;
+      border-radius:18px;
+      padding:16px;
+      font-weight:700;
+      font-size:16px;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(15,23,42,.04);
+    }
+
+    .option:hover{
+      border-color:#86efac;
+      background:#f0fdf4;
     }
 
     .results-grid{
       display:flex;
       flex-direction:column;
-      gap:16px;
-      margin-top:18px;
+      gap:14px;
+      margin-top:16px;
     }
 
     .result-card{
       border:1px solid var(--line);
-      border-radius:22px;
-      padding:18px;
+      border-radius:20px;
+      padding:16px;
       background:#fff;
       box-shadow:0 10px 24px rgba(15,23,42,.05);
     }
@@ -503,7 +409,6 @@
     .result-card h4{
       margin:0;
       font-size:20px;
-      line-height:1.3;
     }
 
     .result-card p{
@@ -533,7 +438,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:12px;
-      margin-top:22px;
+      margin-top:20px;
     }
 
     .footer{
@@ -550,397 +455,12 @@
       flex-wrap:wrap;
     }
 
-    @media (min-width: 860px){
-      .topmeta{display:flex;gap:10px;align-items:center}
-    }
-
     @media (max-width: 860px){
       .hero-grid,
-      .dark-grid,
-      .grid-3,
       .trust-row,
+      .grid-3,
       .wizard-wrap{
         grid-template-columns:1fr;
       }
 
-      .hero{
-        padding-bottom:40px;
-      }
-
-      .section{
-        padding:52px 0;
-      }
-
-      .card,
-      .wizard-card{
-        border-radius:24px;
-      }
-
-      .info-card,
-      .needs-box,
-      .cta-box,
-      .mini-card{
-        border-radius:24px;
-      }
-
-      .example-result-top,
-      .card-head{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .question{
-        font-size:24px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <section class="hero">
-    <div class="container">
-      <div class="topbar">
-        <div class="brand">RobotVal.se</div>
-        <div class="topmeta">
-          <span>Gratis guide</span>
-          <span>•</span>
-          <span>Svenska modeller</span>
-        </div>
-      </div>
-
-      <div class="hero-grid">
-        <div>
-          <div class="eyebrow">Hitta rätt snabbare</div>
-          <h1>Hitta rätt robotgräsklippare på 60 sekunder</h1>
-          <p class="lead">
-            Undvik felköp. Få rätt modell baserat på tomt, budget och behov — utan att läsa tester och jämföra allt själv.
-          </p>
-
-          <div class="actions">
-            <a class="btn btn-primary" href="#wizard">Starta gratis guide</a>
-            <a class="btn btn-secondary" href="#exempel">Se exempel</a>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust-pill">Gratis att använda</div>
-            <div class="trust-pill">Anpassat för svenska tomter</div>
-            <div class="trust-pill">Tar ca 1 minut</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <p class="muted">Exempel på rekommendation</p>
-              <h2>För 800 kvm + smal passage</h2>
-            </div>
-            <div class="badge">Topp 3</div>
-          </div>
-
-          <div class="result-list">
-            <div class="example-result">
-              <div class="example-result-top">
-                <div>
-                  <h3>Husqvarna Automower 415X</h3>
-                  <p>Starkt val för medelstora tomter med smala passager, bra navigation och hög driftsäkerhet.</p>
-                </div>
-                <div class="small-badge">Bäst balans</div>
-              </div>
-            </div>
-
-            <div class="example-result">
-              <div class="example-result-top">
-                <div>
-                  <h3>Segway Navimow i108E</h3>
-                  <p>Passar dig som vill slippa begränsningskabel och få enkel, modern appstyrning.</p>
-                </div>
-                <div class="small-badge">Utan slinga</div>
-              </div>
-            </div>
-
-            <div class="example-result">
-              <div class="example-result-top">
-                <div>
-                  <h3>Gardena Sileno City</h3>
-                  <p>Bra alternativ om du prioriterar låg ljudnivå och enkel vardagsanvändning på mindre ytor.</p>
-                </div>
-                <div class="small-badge">Tyst val</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <div class="grid-3">
-        <div class="info-card">
-          <h3>1 minut att förstå</h3>
-          <p>Du svarar på några enkla frågor och får snabbare rätt riktning.</p>
-        </div>
-        <div class="info-card">
-          <h3>Mindre risk för felköp</h3>
-          <p>Ta hänsyn till passage, lutning, pris och om du vill slippa slinga.</p>
-        </div>
-        <div class="info-card">
-          <h3>Byggd för köpbeslut</h3>
-          <p>Målet är inte mer läsning, utan ett bättre val.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="wizard" class="section">
-    <div class="container">
-      <div class="section-title">
-        <div class="eyebrow">Guiden</div>
-        <h2>Få ett första val direkt</h2>
-        <p class="lead" style="margin-top:14px">
-          Svara på några frågor om din tomt och dina behov. När du är klar får du tre rekommenderade modeller direkt.
-        </p>
-      </div>
-
-      <div class="wizard-wrap">
-        <div class="wizard-card">
-          <div id="questionState">
-            <div class="progress-meta">
-              <span id="stepLabel">Fråga 1 av 5</span>
-              <span id="stepHint">Tar ca 1 minut</span>
-            </div>
-            <div class="progress">
-              <div class="progress-bar" id="progressBar"></div>
-            </div>
-
-            <h3 class="question" id="questionText">Hur stor är din tomt?</h3>
-            <div class="option-grid" id="options"></div>
-          </div>
-
-          <div id="resultState" hidden>
-            <div class="progress-meta">
-              <span>Dina rekommendationer</span>
-              <span>Klar</span>
-            </div>
-            <div class="progress">
-              <div class="progress-bar" style="width:100%"></div>
-            </div>
-
-            <h3 class="question">Vi rekommenderar dessa modeller</h3>
-            <p class="lead" style="font-size:16px;margin-top:0">
-              Baserat på dina svar har vi valt tre modeller som bör passa din situation bäst.
-            </p>
-
-            <div class="results-grid" id="resultsGrid"></div>
-
-            <div class="result-actions">
-              <button class="btn btn-primary" id="restartBtn" type="button">Gör om guiden</button>
-              <a class="btn btn-secondary" href="mailto:hej@robotval.se?subject=Fråga%20om%20RobotVal">Ställ en fråga</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="wizard-side">
-          <div class="mini-card">
-            <h3>Vad vi väger in</h3>
-            <p>
-              Tomtstorlek, budget, smala passager, lutning och om du vill slippa begränsningsslinga.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>Dina svar</h3>
-            <div class="answers-list" id="answersPreview"></div>
-          </div>
-
-          <div class="mini-card">
-            <h3>Tips</h3>
-            <p>
-              Har du smala passager eller kuperad tomt är det ofta värt att prioritera navigation och driftsäkerhet framför lägsta pris.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="exempel" class="section section-dark">
-    <div class="container">
-      <div class="dark-grid">
-        <div>
-          <div class="eyebrow" style="color:#86efac">Exempel</div>
-          <h2 style="margin-top:10px;font-size:clamp(30px,4vw,44px);letter-spacing:-.02em">
-            Ett bättre sätt att välja robotgräsklippare
-          </h2>
-          <p class="lead" style="color:#cbd5e1;margin-top:16px">
-            Istället för att läsa flera guider själv får du ett tydligare val utifrån din situation — till exempel om du har smala passager, kuperad tomt eller vill slippa kabel.
-          </p>
-        </div>
-
-        <div class="needs-box">
-          <p class="muted" style="color:#94a3b8;margin:0">Vanliga behov</p>
-          <div class="needs-wrap">
-            <div class="need">Under 20 000 kr</div>
-            <div class="need">För smal passage</div>
-            <div class="need">För sluttning</div>
-            <div class="need">Utan slinga</div>
-            <div class="need">Tyst robotgräsklippare</div>
-            <div class="need">För liten tomt</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container" style="max-width:980px">
-      <div class="cta-box">
-        <div class="eyebrow" style="color:rgba(5,46,22,.65)">Nästa steg</div>
-        <h2 style="margin-top:10px;font-size:clamp(30px,4vw,44px);letter-spacing:-.02em">
-          Testa RobotVal nu
-        </h2>
-        <p class="lead" style="max-width:700px;margin-top:14px">
-          Börja med guiden ovan och få ett första förslag direkt utifrån din tomt och dina behov.
-        </p>
-
-        <div class="actions">
-          <a class="btn btn-primary" href="#wizard" style="background:#0f172a">Starta gratis guide</a>
-          <a class="btn btn-secondary" href="mailto:hej@robotval.se" style="background:rgba(255,255,255,.6)">Kontakta oss</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container footer-row">
-      <div>© 2026 RobotVal.se</div>
-      <div>Uppdaterad april 2026</div>
-    </div>
-  </footer>
-
-  <script>
-    const questions = [
-      {
-        key: 'size',
-        label: 'Tomt',
-        text: 'Hur stor är din tomt?',
-        options: [
-          { value: 'small', label: 'Under 300 kvm' },
-          { value: 'medium', label: '300–700 kvm' },
-          { value: 'large', label: '700–1200 kvm' },
-          { value: 'xlarge', label: '1200+ kvm' }
-        ]
-      },
-      {
-        key: 'budget',
-        label: 'Budget',
-        text: 'Vilken budget har du?',
-        options: [
-          { value: 'low', label: 'Under 10 000 kr' },
-          { value: 'mid', label: '10 000–20 000 kr' },
-          { value: 'high', label: '20 000–35 000 kr' },
-          { value: 'premium', label: '35 000+ kr' }
-        ]
-      },
-      {
-        key: 'passages',
-        label: 'Smala passager',
-        text: 'Har du smala passager?',
-        options: [
-          { value: 'yes', label: 'Ja' },
-          { value: 'no', label: 'Nej' }
-        ]
-      },
-      {
-        key: 'slope',
-        label: 'Lutning',
-        text: 'Är tomten kuperad?',
-        options: [
-          { value: 'flat', label: 'Mest platt' },
-          { value: 'medium', label: 'Lite lutning' },
-          { value: 'steep', label: 'Ganska brant' }
-        ]
-      },
-      {
-        key: 'wireless',
-        label: 'Utan slinga',
-        text: 'Vill du slippa slinga?',
-        options: [
-          { value: 'yes', label: 'Ja' },
-          { value: 'no', label: 'Nej' },
-          { value: 'any', label: 'Spelar ingen roll' }
-        ]
-      }
-    ];
-
-    const models = [
-      {
-        name: 'Gardena Sileno City',
-        tags: ['Tyst', 'Liten tomt', 'Enkel'],
-        description: 'Bra val för mindre tomter där låg ljudnivå och enkel vardagsanvändning är viktigast.',
-        match: (a) => {
-          let score = 0;
-          if (a.size === 'small') score += 5;
-          if (a.budget === 'low') score += 3;
-          if (a.budget === 'mid') score += 2;
-          if (a.passages === 'yes') score += 2;
-          if (a.wireless === 'no') score += 1;
-          return score;
-        }
-      },
-      {
-        name: 'Worx Landroid M500',
-        tags: ['Budget', 'Liten tomt', 'Prisvärd'],
-        description: 'Passar dig som vill komma igång till lägre pris och har en enklare tomt.',
-        match: (a) => {
-          let score = 0;
-          if (a.budget === 'low') score += 5;
-          if (a.size === 'small' || a.size === 'medium') score += 3;
-          if (a.slope === 'flat') score += 2;
-          if (a.wireless === 'no') score += 1;
-          return score;
-        }
-      },
-      {
-        name: 'Husqvarna Automower 305',
-        tags: ['Smala passager', 'Kompakt', 'Premium'],
-        description: 'Starkt val för mindre till medelstora tomter där navigation och kvalitet väger tungt.',
-        match: (a) => {
-          let score = 0;
-          if (a.size === 'small' || a.size === 'medium') score += 4;
-          if (a.passages === 'yes') score += 4;
-          if (a.budget === 'mid') score += 3;
-          if (a.budget === 'high') score += 2;
-          if (a.slope === 'medium') score += 2;
-          return score;
-        }
-      },
-      {
-        name: 'Husqvarna Automower 415X',
-        tags: ['Bäst balans', 'Passager', 'Kuperad tomt'],
-        description: 'Bra allroundval för medelstora tomter med smala passager och lite tuffare förutsättningar.',
-        match: (a) => {
-          let score = 0;
-          if (a.size === 'medium' || a.size === 'large') score += 4;
-          if (a.passages === 'yes') score += 4;
-          if (a.slope === 'medium' || a.slope === 'steep') score += 3;
-          if (a.budget === 'high' || a.budget === 'premium') score += 3;
-          return score;
-        }
-      },
-      {
-        name: 'Segway Navimow i105E',
-        tags: ['Utan slinga', 'Modern app', 'Smidig'],
-        description: 'Bra alternativ för mindre till medelstora tomter om du vill slippa begränsningskabel.',
-        match: (a) => {
-          let score = 0;
-          if (a.wireless === 'yes') score += 6;
-          if (a.size === 'small' || a.size === 'medium') score += 3;
-          if (a.budget === 'mid' || a.budget === 'high') score += 3;
-          if (a.passages === 'yes') score += 1;
-          return score;
-        }
-      },
-      {
-        name: 'Segway Navimow i108E',
-        tags: ['Utan slinga', 'Större tomt', 'Modern'],
-        description: 'Starkt val om du vill ha en kabel-fri lösning
+      .card
